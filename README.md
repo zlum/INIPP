@@ -6,6 +6,7 @@ There is support of multiple values for one paramter and attached comments.
 Library interface provides stream type conversion to simplify usage.
 
 More examples in test/test.cpp.
+
 Library adding guide in INSTALL.cpp.
 
 ## Usage example:
@@ -25,7 +26,7 @@ int main()
 
     return 0;
 }
-...
+```
 
 ## Output file example:
 ```
