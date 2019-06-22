@@ -1,0 +1,10 @@
+
+# To add INIPP to your project add next lines to your cmake file
+# To activate test build set IPP_TEST_BUILD CMake paramter. 
+
+add_subdirectory(../inipp inipp)
+
+include_directories(${IPP_INCLUDE})
+
+target_link_libraries(${PROJECT_NAME} inipp)
+
