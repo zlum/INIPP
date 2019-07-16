@@ -2,7 +2,6 @@
 #define INIPP_STREAMS_HPP
 
 #include "ipptuple.hpp"
-#include "src/types/ipptypes.hpp"
 
 template<typename ...Ts>
 inline std::istream& operator >>(std::istream& is,

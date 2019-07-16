@@ -31,7 +31,7 @@ protected:
                     const std::string& comment);
 
     template<typename ...Ts>
-    bool getParameter(IPP_Types::Parameter* parameter, Ts&... values) const;
+    static bool getParameter(IPP_Types::Parameter* parameter, Ts&... values);
 
     template<typename ...Ts>
     bool setParameter(IPP_Types::Parameter** parameter, const std::string& name,
@@ -49,7 +49,7 @@ private:
 
 template<typename ...Ts>
 bool
-IPPCore::getParameter(IPP_Types::Parameter* parameter, Ts&... values) const
+IPPCore::getParameter(IPP_Types::Parameter* parameter, Ts&... values)
 {
     if(parameter == nullptr) return false;
 

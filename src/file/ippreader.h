@@ -6,7 +6,7 @@
 
 namespace IPP_Types
 {
-    class ParameterVector;
+    struct ParameterVector;
 } // namespace IPP_Types
 
 namespace IPP_Reader

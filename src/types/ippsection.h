@@ -6,7 +6,7 @@
 
 namespace IPP_Types
 {
-    class Parameter;
+    struct Parameter;
 } // namespace IPP_Types
 
 class IPPSection
