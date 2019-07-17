@@ -81,6 +81,21 @@ namespace IPP_Types
     };
 } // namespace IPP_Types
 
+// Streams predeclaration from streams.hpp
+// Interpret int8_t & uint8_t as numbers
+inline std::istream& operator >>(std::istream& is, int8_t& value);
+inline std::istream& operator >>(std::istream& is, uint8_t& value);
+inline std::ostream& operator <<(std::ostream& os, const int8_t& value);
+inline std::ostream& operator <<(std::ostream& os, const uint8_t& value);
+
+template<typename ...Ts>
+inline std::istream& operator >>(std::istream& is,
+                                 const IPP_Types::ParameterTuple<Ts...>& parameter);
+inline std::ostream& operator <<(std::ostream& os,
+                                 const IPP_Types::Parameter& parameter);
+template<typename ...Ts>
+inline std::ostream& operator <<(std::ostream& out, const std::tuple<Ts...>& t);
+
 template<typename ...Ts>
 const std::string
 IPP_Types::ParameterTuple<Ts...>::getValueAsString() const
