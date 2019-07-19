@@ -107,7 +107,7 @@ IniPP::getComment(const std::string& name, std::string& comment)
 
     comment = parameter->comment;
 
-    return true;
+    return !comment.empty();
 }
 
 inline bool
