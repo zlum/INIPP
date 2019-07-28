@@ -58,7 +58,7 @@ set(IPP_SRC
     src/types/ipptypes.hpp
 )
 
-if(SF_TEST_BUILD)
+if(IPP_TEST_BUILD)
     set(SOURCE
         ${IPP_TEST}
         ${IPP_SRC}
