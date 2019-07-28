@@ -1,7 +1,7 @@
 
 # INI++
 
-INI++ is a library to easily manipulate INI files with C++14.
+INI++ is a library to easily manipulate INI files with C++11.
 There is support of multiple values for one paramter and attached comments.
 Library interface provides stream type conversion to simplify usage.
 
