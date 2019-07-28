@@ -13,8 +13,7 @@ namespace IPP_Tuple
 
     template<typename Tuple, std::size_t... I>
     void
-    istreamToTuple(std::istream& is, Tuple& values,
-                   std::index_sequence<I...> index);
+    istreamToTuple(std::istream& is, Tuple& values);
 
     template<std::size_t> struct int_ {};
 
@@ -42,13 +41,12 @@ IPP_Tuple::istreamToValue(std::istream& is, T& value)
 
 template<typename Tuple, std::size_t... I>
 void
-IPP_Tuple::istreamToTuple(std::istream& is, Tuple& values,
-                          std::index_sequence<I...> /*index*/)
+IPP_Tuple::istreamToTuple(std::istream& is, Tuple& values)
 {
-    std::initializer_list<bool>
+    for(auto& next : {values})
     {
-        istreamToValue(is, std::get<I>(values))...
-    };
+        istreamToValue(is, next);
+    }
 }
 
 template<typename Tuple, size_t Pos>

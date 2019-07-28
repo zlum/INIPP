@@ -110,6 +110,12 @@ IPPCache::getSection(const string& section)
     return nullptr;
 }
 
+std::unordered_map<string, IPPSection>*
+IPPCache::getSections()
+{
+    return &_sections;
+}
+
 deque<string>*
 IPPCache::getSequence()
 {

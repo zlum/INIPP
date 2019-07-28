@@ -24,6 +24,8 @@ public:
     IPP_Types::Parameter* getFirstParameter() const;
     IPP_Types::Parameter* getLastParameter() const;
 
+    std::unordered_map<std::string, IPP_Types::Parameter*>* getParameters();
+
 private:
     std::unordered_map<std::string, IPP_Types::Parameter*> _parameters;
     IPP_Types::Parameter* _firstParameter;

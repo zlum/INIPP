@@ -31,6 +31,12 @@ IPPCore::~IPPCore()
     delete _cache;
 }
 
+IPPCache*
+IPPCore::getCache() const
+{
+    return _cache;
+}
+
 string
 IPPCore::getSection() const
 {

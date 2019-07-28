@@ -52,7 +52,7 @@ class IniPP:
     */
 
 public:
-    inline explicit IniPP(const std::string& fileName = "example.txt",
+    inline explicit IniPP(const std::string& fileName,
                           IPP::Mode mode = IPP::Mode::cache);
     inline virtual ~IniPP() = default;
 
@@ -79,6 +79,10 @@ public:
 
     template<typename ...Ts>
     bool setDefaultParameter(const std::string& name, const Ts... value);
+
+    inline bool writeFile();
+
+    inline IPPCache* getCache() const;
 };
 
 inline IniPP::IniPP(const std::string& fileName, IPP::Mode mode):
@@ -195,6 +199,18 @@ IniPP::setDefaultParameter(const std::string& name,
     if(parameter != nullptr) return true;
 
     return IPPCore::setParameter(&parameter, name, value...);
+}
+
+inline bool
+IniPP::writeFile()
+{
+    return IPPCore::writeFile(getCache());
+}
+
+inline IPPCache*
+IniPP::getCache() const
+{
+    return IPPCore::getCache();
 }
 
 #endif // INIPP_HPP

@@ -114,8 +114,9 @@ IPPSection::rmParameter(const string& parameter)
             next = next->nextParameter; // ++ iterator
         }
 
+        IPP_Types::Parameter* parameter = search->second;
         _parameters.erase(search);
-        delete search->second;
+        delete parameter;
 
         return true;
     }
@@ -146,4 +147,10 @@ IPP_Types::Parameter*
 IPPSection::getLastParameter() const
 {
     return _lastParameter;
+}
+
+unordered_map<string, IPP_Types::Parameter*>*
+IPPSection::getParameters()
+{
+    return &_parameters;
 }

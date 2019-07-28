@@ -7,15 +7,18 @@ if(CMAKE_BUILD_TYPE MATCHES Debug)
     set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 endif(CMAKE_BUILD_TYPE MATCHES Debug)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 11)
 
 if(NOT MSVC)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}\
-        -std=gnu++14 -Wall -Wextra -Wpedantic")
+    set(CMAKE_CXX_FLAGS
+        "${CMAKE_CXX_FLAGS} -std=gnu++11 -Wall -Wextra -pedantic"
+    )
 endif(NOT MSVC)
 
 if(NOT WIN32)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
+    set(CMAKE_CXX_FLAGS
+        "${CMAKE_CXX_FLAGS} -fPIC"
+    )
 endif(NOT WIN32)
 
 set(INCLUDE
@@ -55,7 +58,7 @@ set(IPP_SRC
     src/types/ipptypes.hpp
 )
 
-if(IPP_TEST_BUILD)
+if(SF_TEST_BUILD)
     set(SOURCE
         ${IPP_TEST}
         ${IPP_SRC}
@@ -63,10 +66,10 @@ if(IPP_TEST_BUILD)
 
     add_compile_options(-DIPP_TEST_BUILD)
     add_executable(${PROJECT_NAME} ${SOURCE})
-else(IPP_TEST_BUILD)
+else()
     set(SOURCE
         ${IPP_SRC}
     )
 
     add_library(${PROJECT_NAME} ${SOURCE})
-endif(IPP_TEST_BUILD)
+endif()

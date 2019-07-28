@@ -16,12 +16,14 @@ namespace IPP
 } // namespace IPP
 
 class IPPCore:
-        private File
+        protected File
 {
 public:
     explicit IPPCore(const std::string& filename = "example.txt",
                      IPP::Mode mode = IPP::Mode::cache);
     virtual ~IPPCore();
+
+    IPPCache* getCache() const;
 
 protected:
     virtual std::string getSection() const;

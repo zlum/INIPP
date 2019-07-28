@@ -12,7 +12,7 @@ File::File(const string& fileName):
     fileName(fileName)
 {
     // Создаёт файл, если его нет
-    struct stat buffer;
+    struct stat buffer{};
 
     if(stat(fileName.c_str(), &buffer) != 0)
     {

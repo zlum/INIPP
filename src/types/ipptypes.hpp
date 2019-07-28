@@ -113,34 +113,25 @@ IPP_Types::ParameterTuple<Ts...>::getValueAsString() const
     return line;
 }
 
-template<typename Func, typename ...Ts, std::size_t ...Is>
-void
-forEachInTuple(const std::tuple<Ts...>& tuple, Func func,
-               std::index_sequence<Is...> /*seq*/)
-{
-    using expander = int[];
-    (void)expander {0, ((void)func(std::get<Is>(tuple)), 0)...};
-}
-
-template<typename Func, typename ...Ts>
-void
-forEachInTuple(const std::tuple<Ts...>& tuple, Func func)
-{
-    forEachInTuple(tuple, func, std::make_index_sequence<sizeof...(Ts)>());
-}
-
 template<typename ...Ts>
 const std::vector<std::string>
 IPP_Types::ParameterTuple<Ts...>::getValueAsVector() const
 {
     std::vector<std::string> vec;
+    std::stringstream ss;
+    std::string val;
 
-    forEachInTuple(value, [&](const auto& x)
+    ss.imbue(std::locale(std::locale(),
+                         new IPP_Types::Tokens(
+                             IPP_Types::Tokens::getTableDelimiters())));
+    // TODO: Optimize vector fulfill
+    ss << value;
+
+    for(unsigned i = 0; i < sizeof...(Ts); i++)
     {
-        std::stringstream ss;
-        ss << x;
-        vec.push_back(ss.str());
-    });
+        ss >> val;
+        vec.push_back(val);
+    }
 
     return vec;
 }

@@ -21,8 +21,11 @@ public:
                      const std::string& section);
 
     IPP_Types::Parameter* getParameter(const std::string& parameter,
-                                  const std::string& section) const;
+                                       const std::string& section) const;
+
     IPPSection* getSection(const std::string& section);
+    std::unordered_map<std::string, IPPSection>* getSections();
+
     std::deque<std::string>* getSequence();
 
 private:

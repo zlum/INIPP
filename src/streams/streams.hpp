@@ -45,8 +45,7 @@ inline std::istream& operator >>(std::istream& is,
                              IPP_Types::Tokens::getTableFull())));
 
     is >> parameter.name;
-    IPP_Tuple::istreamToTuple(is, parameter.value,
-                              std::make_index_sequence<sizeof...(Ts)>{});
+    IPP_Tuple::istreamToTuple(is, parameter.value);
 
     return is;
 }

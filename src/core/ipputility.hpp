@@ -67,8 +67,7 @@ IPP_Utility::istreamToArgs(std::istream& is, Ts&&... values)
 {
     std::tuple<Ts...> tuple =
             std::forward_as_tuple(std::forward<Ts>(values)...);
-    IPP_Tuple::istreamToTuple(is, tuple,
-                              std::make_index_sequence<sizeof...(Ts)>{});
+    IPP_Tuple::istreamToTuple(is, tuple);
 }
 
 template<typename Tuple, typename ...Ts>
