@@ -93,4 +93,21 @@ inline std::istream& operator >>(std::istream& is, int8_t& value)
     return is;
 }
 
+template<typename ...Ts>
+const std::string
+IPP_Types::ParameterTuple<Ts...>::getValueAsString() const
+{
+    std::stringstream stream;
+    std::string line;
+
+    stream << value;
+
+    line = stream.str();
+
+    line.erase(std::remove(line.begin(), line.end(), '\r'), line.end());
+    line.erase(std::remove(line.begin(), line.end(), '\n'), line.end());
+
+    return line;
+}
+
 #endif // INIPP_STREAMS_HPP

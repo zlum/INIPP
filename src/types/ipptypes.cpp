@@ -34,6 +34,23 @@ IPP_Types::Tokens::getTableSection()
     return tokensTableSection;
 }
 
+const ctype_base::mask*
+IPP_Types::Tokens::createTable(initializer_list<char> delims) noexcept
+{
+    static const ctype::mask* const_rc = ctype::classic_table();
+    auto rc = new ctype::mask[ctype::table_size];
+    memcpy(rc, const_rc, ctype::table_size * sizeof(ctype::mask));
+
+    rc[static_cast<unsigned char>(' ')] = ctype_base::alpha;
+
+    for(const auto& next : delims)
+    {
+        rc[static_cast<unsigned char>(next)] = ctype_base::space;
+    }
+
+    return rc;
+}
+
 IPP_Types::SyncData::SyncData():
     mutexParCounter(new mutex),
     mutexSeqCounter(new mutex),
@@ -77,21 +94,4 @@ const vector<string>
 IPP_Types::ParameterVector::getValueAsVector() const
 {
     return value;
-}
-
-const ctype_base::mask*
-IPP_Types::Tokens::createTable(initializer_list<char> delims) noexcept
-{
-    static const ctype::mask* const_rc = ctype::classic_table();
-    auto rc = new ctype::mask[ctype::table_size];
-    memcpy(rc, const_rc, ctype::table_size * sizeof(ctype::mask));
-
-    rc[static_cast<unsigned char>(' ')] = ctype_base::print;
-
-    for(const auto& next : delims)
-    {
-        rc[static_cast<unsigned char>(next)] = ctype_base::space;
-    }
-
-    return rc;
 }

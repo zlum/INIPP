@@ -24,7 +24,42 @@ namespace IPP_Tuple
     template<typename Tuple>
     std::ostream&
     print(std::ostream& os, const Tuple& values, int_<1> pos);
+
+    template<std::size_t I = 0, typename... Tp>
+    typename std::enable_if<I == sizeof...(Tp), void>::type
+    tupleToVector(const std::tuple<Tp...>& /*t*/,
+                  std::vector<std::string>* /*vec*/)
+    {
+    }
+
+    template<std::size_t I = 0, typename... Tp>
+    typename std::enable_if<I < sizeof...(Tp), void>::type
+    tupleToVector(const std::tuple<Tp...>& t,
+                  std::vector<std::string>* vec)
+    {
+        std::string val;
+        std::stringstream ss;
+
+        ss.imbue(std::locale(std::locale(),
+                             new IPP_Types::Tokens(
+                                 IPP_Types::Tokens::getTableDelimiters())));
+
+        ss << std::get<I>(t);
+        ss >> val;
+        vec->push_back(val);
+        tupleToVector<I + 1, Tp...>(t, vec);
+    }
 } // namespace IPP_Tuple
+
+template<typename ...Ts>
+const std::vector<std::string>
+IPP_Types::ParameterTuple<Ts...>::getValueAsVector() const
+{
+    std::vector<std::string> vec;
+    IPP_Tuple::tupleToVector(value, &vec);
+
+    return vec;
+}
 
 template<typename T>
 bool
