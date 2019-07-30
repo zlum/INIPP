@@ -93,4 +93,3 @@ IPPCore::findParameter(const string& name,
 
     return _cache->getParameter(name, section);
 }
-
