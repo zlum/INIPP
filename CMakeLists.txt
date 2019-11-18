@@ -26,11 +26,6 @@ set(INCLUDE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-set(IPP_INCLUDE
-    ${INCLUDE}
-    PARENT_SCOPE
-)
-
 include_directories(${INCLUDE})
 
 set(IPP_TEST
@@ -72,4 +67,6 @@ else()
     )
 
     add_library(${PROJECT_NAME} ${SOURCE})
+    target_include_directories(${PROJECT_NAME}
+        INTERFACE ${INCLUDE})
 endif()
